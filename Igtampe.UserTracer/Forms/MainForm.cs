@@ -3,29 +3,49 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace Igtampe.UserTracer {
+
+    /// <summary>This is where everything happens</summary>
     public partial class MainForm:Form {
 
+        //-[Properties]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Trace this form is editing</summary>
         public Trace MyTrace = new Trace();
+
+        /// <summary>private holder for the save location</summary>
         private string savelocale = "";
+
+        /// <summary>Location on disk the usertrace being edited will be saved to</summary>
         public string SaveLocaiton { get { return savelocale; } set { savelocale = value; Text = "UserTrace - " + value; } }
+
+        /// <summary>Used to determine if the trace has been modified since it was loaded or last saved</summary>
         private bool Modified = false;
 
+        //-[Constructor]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Default constructor for a MainForm creating a new Trace</summary>
         public MainForm() : this(new Trace()) { }
         
+        /// <summary>Constructor for a mainform editing a pre-existing trace.</summary>
+        /// <param name="T"></param>
         public MainForm(Trace T) { 
             InitializeComponent();
             LoadTrace(T);
         }
 
+        //-[Buttons]------------------------------------------------------------------------------------------------------------------------------------------
 
-        private void AboutToolStripMenuItem_Click(object sender,EventArgs e) {new AboutForm().ShowDialog();}
+        //You know maybe all of this logic should've been put *in* the UserTrace object.... oh well. It works, so it works
 
+        /// <summary>Handles the adding of a new user to the UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender,EventArgs e) {
             User NewUser = new User();
             if(MyTrace.AllUsers.Count == 0) {
                 MessageBox.Show("Since this is the first user, this will be the root user.\n\nThis can be changed later, but you may lose users before the root user if you save","Root User Notice",MessageBoxButtons.OK,MessageBoxIcon.Information);
             } else { 
-                AllUsersForm Linker = new AllUsersForm(NewUser,MyTrace.AllUsers);
+                UserLinkerForm Linker = new UserLinkerForm(NewUser,MyTrace.AllUsers);
                 if(Linker.ShowDialog() != DialogResult.OK) {return;}
 
                 User Parent = MyTrace.AllUsers[Linker.ListIndex];
@@ -52,6 +72,9 @@ namespace Igtampe.UserTracer {
 
         }
 
+        /// <summary>Handles the editing of an already existing User in the UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditButton_Click(object sender,EventArgs e) {
 
             if(GetSelectedIndex() == -1) { return; }
@@ -65,6 +88,9 @@ namespace Igtampe.UserTracer {
             Modified = true;
         }
 
+        /// <summary>Handles the process of re-linking an already existing User in this UserTrace to a new parent</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LinkButton_Click(object sender,EventArgs e) {
             if(GetSelectedIndex() == -1) { return; }
 
@@ -73,7 +99,7 @@ namespace Igtampe.UserTracer {
                 return;
             }
 
-            AllUsersForm Linker = new AllUsersForm(MyTrace.AllUsers[GetSelectedIndex()],MyTrace.AllUsers);
+            UserLinkerForm Linker = new UserLinkerForm(MyTrace.AllUsers[GetSelectedIndex()],MyTrace.AllUsers);
             if(Linker.ShowDialog() != DialogResult.OK) { return; }
 
 
@@ -91,6 +117,9 @@ namespace Igtampe.UserTracer {
 
         }
 
+        /// <summary>Handles the process of removing a user from the UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteButton_Click(object sender,EventArgs e) {
             if(GetSelectedIndex() == -1) { return; }
 
@@ -119,14 +148,9 @@ namespace Igtampe.UserTracer {
             Modified = true;
         }
 
-        private void UserListView_SelectedIndexChange(object sender,EventArgs e) {ModifyButtons(true);}
-
-        private void ModifyButtons(bool Enabled) {
-            EditButton.Enabled = Enabled;
-            LinkButton.Enabled = Enabled;
-            DeleteButton.Enabled = Enabled;
-        }
-
+        /// <summary>Handles loading and changing the Server Icon</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PFPPictureBox_Click(object sender,EventArgs e) {
             if(ProfilePicturePicker.ShowDialog() == DialogResult.OK) {
                 Image NewPFP = new Bitmap(ProfilePicturePicker.FileName);
@@ -137,6 +161,9 @@ namespace Igtampe.UserTracer {
             }
         }
 
+        /// <summary>Handles loading and changing the tiled background of the UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TileBG_Click(object sender,EventArgs e) {
             if(ProfilePicturePicker.ShowDialog() == DialogResult.OK) {
                 Image NewPFP = new Bitmap(ProfilePicturePicker.FileName);
@@ -146,61 +173,30 @@ namespace Igtampe.UserTracer {
             }
         }
 
-        private void NameBox_TextChanged(object sender,EventArgs e) {
-            MyTrace.ServerName = NameBox.Text;
-            GeneratePreview();
-            Modified = true;
-        }
+        /// <summary>Handles creating a previewform for the UserTrace image</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PreviewPictureBox_Click(object sender,EventArgs e) { new PreviewForm(MyTrace.TraceImage).ShowDialog(); }
 
-        private void CreatedDateTimePicker_ValueChanged(object sender,EventArgs e) {
-            MyTrace.ServerStartDate = CreatedDateTimePicker.Value;
-            GeneratePreview();
-            Modified = true;
-        }
+        //-[Toolstrip Menu Items]------------------------------------------------------------------------------------------------------------------------------------------
 
-        private void RootUserComboBox_SelectedIndexChanged(object sender,EventArgs e) {
-            MyTrace.RootUser = MyTrace.AllUsers[RootUserComboBox.SelectedIndex];
-            GeneratePreview();
-            Modified = true;
-        }
+        /// <summary>Launches the About page</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AboutToolStripMenuItem_Click(object sender,EventArgs e) { new AboutForm().ShowDialog(); }
 
-        private void GeneratePreview() {PreviewPictureBox.Image = MyTrace.GenerateTraceImage();}
-
-        private int GetSelectedIndex() {
-            if(listView1.SelectedIndices.Count == 0) {
-                MessageBox.Show("Please select an index before using this button","no",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return - 1; 
-            }
-            return listView1.SelectedIndices[0]; 
-        }
-
-        private void PopulateListview() {
-
-            listView1.Items.Clear();
-            RootUserComboBox.Items.Clear();
-
-            foreach(User U in MyTrace.AllUsers) {
-                ListViewItem L = new ListViewItem(U.Name);
-                L.SubItems.Add(U.Children.Count.ToString());
-                listView1.Items.Add(L);
-
-                RootUserComboBox.Items.Add(U.Name);
-
-            }
-
-            RootUserComboBox.Text = MyTrace.RootUser?.Name;
-
-            ModifyButtons(false);
-        }
-
-        private void PreviewPictureBox_Click(object sender,EventArgs e) {new PreviewForm(MyTrace.TraceImage).ShowDialog() ;}
-
+        /// <summary>Handles saving the UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveToolStripMenuItem_Click(object sender,EventArgs e) {
             if(string.IsNullOrWhiteSpace(SaveLocaiton)) { SaveAsToolStripMenuItem_Click(sender,e); return; }
             MyTrace.SaveTrace(SaveLocaiton);
             Modified = false;
         }
 
+        /// <summary>Handles selecting where to save the UserTrace, then saves it</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveAsToolStripMenuItem_Click(object sender,EventArgs e) {
             ProjectDirPicker.Description = "Pick a folder to save this UserTrace to";
             if(ProjectDirPicker.ShowDialog() == DialogResult.OK) {
@@ -209,8 +205,14 @@ namespace Igtampe.UserTracer {
             }
         }
 
-        private void PrintToolStripMenuItem_Click(object sender,EventArgs e) {if(ExportFileDialog.ShowDialog() == DialogResult.OK) { MyTrace.TraceImage.Save(ExportFileDialog.FileName,System.Drawing.Imaging.ImageFormat.Png); }}
+        /// <summary>Handles exporting the UserTrace image</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrintToolStripMenuItem_Click(object sender,EventArgs e) { if(ExportFileDialog.ShowDialog() == DialogResult.OK) { MyTrace.TraceImage.Save(ExportFileDialog.FileName,System.Drawing.Imaging.ImageFormat.Png); } }
 
+        /// <summary>Handles Opening another existing UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenToolStripMenuItem_Click(object sender,EventArgs e) {
 
             if(!AreYouSure()) { return; }
@@ -232,11 +234,11 @@ namespace Igtampe.UserTracer {
                 PopulateListview();
                 Modified = false;
             }
-
-
-
         }
 
+        /// <summary>Handles switching to a new UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewToolStripMenuItem_Click(object sender,EventArgs e) {
             if(!AreYouSure()) { return; }
 
@@ -245,15 +247,100 @@ namespace Igtampe.UserTracer {
             Modified = false;
         }
 
-        private void ExitToolStripMenuItem_Click(object sender,EventArgs e) {Close();}
+        /// <summary>Closes UserTrace</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitToolStripMenuItem_Click(object sender,EventArgs e) { Close(); }
 
+        //-[Change Handlers]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Handles changing the Server Name</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NameBox_TextChanged(object sender,EventArgs e) {
+            MyTrace.ServerName = NameBox.Text;
+            GeneratePreview();
+            Modified = true;
+        }
+
+        /// <summary>Handles changing the server creation date</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreatedDateTimePicker_ValueChanged(object sender,EventArgs e) {
+            MyTrace.ServerCreationDate = CreatedDateTimePicker.Value;
+            GeneratePreview();
+            Modified = true;
+        }
+
+        /// <summary>Handles changing the root user</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RootUserComboBox_SelectedIndexChanged(object sender,EventArgs e) {
+            MyTrace.RootUser = MyTrace.AllUsers[RootUserComboBox.SelectedIndex];
+            GeneratePreview();
+            Modified = true;
+        }
+
+        /// <summary>Handles enabling modification buttons when an item is selected</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserListView_SelectedIndexChange(object sender,EventArgs e) { ModifyButtons(true); }
+
+        //-[Methods]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Enabled or disables buttons relating to modification of users in the UserTrace</summary>
+        /// <param name="Enabled"></param>
+        private void ModifyButtons(bool Enabled) {
+            EditButton.Enabled = Enabled;
+            LinkButton.Enabled = Enabled;
+            DeleteButton.Enabled = Enabled;
+        }
+
+        /// <summary>Asks the UserTrace to regenerate the image, and to display it.</summary>
+        private void GeneratePreview() {PreviewPictureBox.Image = MyTrace.GenerateTraceImage();}
+
+        /// <summary>Gets the selected index of the user listview</summary>
+        /// <returns></returns>
+        private int GetSelectedIndex() {
+            if(listView1.SelectedIndices.Count == 0) {
+                MessageBox.Show("Please select an index before using this button","no",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return - 1; 
+            }
+            return listView1.SelectedIndices[0]; 
+        }
+
+        /// <summary>Populates the listview and combobox with all users in the UserTrace</summary>
+        private void PopulateListview() {
+
+            listView1.Items.Clear();
+            RootUserComboBox.Items.Clear();
+
+            foreach(User U in MyTrace.AllUsers) {
+                ListViewItem L = new ListViewItem(U.Name);
+                L.SubItems.Add(U.Children.Count.ToString());
+                listView1.Items.Add(L);
+
+                RootUserComboBox.Items.Add(U.Name);
+
+            }
+
+            RootUserComboBox.Text = MyTrace.RootUser?.Name;
+
+            ModifyButtons(false);
+        }
+
+        /// <summary>Handles the closing of the form</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClosingHandler(object sender,FormClosingEventArgs e) {e.Cancel = !AreYouSure();}
 
+        /// <summary>Loads a Trace</summary>
+        /// <param name="T"></param>
         private void LoadTrace(Trace T) {
             MyTrace = T;
             PFPPictureBox.Image = MyTrace.ServerLogo;
             NameBox.Text = MyTrace.ServerName;
-            CreatedDateTimePicker.Value = MyTrace.ServerStartDate;
+            CreatedDateTimePicker.Value = MyTrace.ServerCreationDate;
 
             PopulateListview();
             GeneratePreview();
@@ -261,6 +348,8 @@ namespace Igtampe.UserTracer {
 
         }
 
+        /// <summary>Asks a user if they're sure when Opening a new UserTrace, creating a new UserTrace, or closing UserTrace if the currently open UserTrace has unsaved changes</summary>
+        /// <returns></returns>
         private bool AreYouSure() {
             if(Modified) {
                 DialogResult D = MessageBox.Show("This project has not been saved! Save before proceeding?","Are you sure you want to do this?",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);

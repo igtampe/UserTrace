@@ -9,13 +9,28 @@ namespace Igtampe.UserTracer {
     /// <summary>Holds one UserTrace file and can generate the Trace Image</summary>
     public class Trace {
 
+        //-[Properties]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Holder for root user</summary>
         private User rootuser;
+
+        /// <summary>Root user of this UserTrace</summary>
         public User RootUser { get { return rootuser; } set { rootuser = value; } }
+
+        /// <summary>All users in this UserTrace</summary>
         public List<User> AllUsers { get; set; } = new List<User>();
+
+        /// <summary>Tile Background of this user trace</summary>
         public Image TileBackground { get; set; } = Properties.Resources.Sandstone;
+
+        /// <summary>Server Logo of this UserTrace</summary>
         public Image ServerLogo { get; set; } = Properties.Resources.UnknownPerson;
+
+        /// <summary>Name of the server presented in this UserTrace </summary>
         public string ServerName { get; set; } = "Server";
-        public DateTime ServerStartDate { get; set; } = new DateTime(2017,3,31);
+
+        /// <summary>Date the server presented in this UserTrace was created</summary>
+        public DateTime ServerCreationDate { get; set; } = new DateTime(2017,3,31);
 
         /// <summary>private holder for the trace image</summary>
         private Image traceImage;
@@ -25,6 +40,8 @@ namespace Igtampe.UserTracer {
             get { if(traceImage == null) { return GenerateTraceImage(); } else { return traceImage; } } 
             private set { traceImage = value; } 
         }
+
+        //-[Constructor]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Creates a default new UserTrace</summary>
         public Trace() { }
@@ -49,7 +66,7 @@ namespace Igtampe.UserTracer {
             //Load the server name and  server start date
             ServerName = ProjectDOD["name"];
             string[] DateTemp = ProjectDOD["date"].Split('-');
-            ServerStartDate = new DateTime(int.Parse(DateTemp[0]),int.Parse(DateTemp[1]),int.Parse(DateTemp[2]));
+            ServerCreationDate = new DateTime(int.Parse(DateTemp[0]),int.Parse(DateTemp[1]),int.Parse(DateTemp[2]));
 
             //Now load the users!!!
             Dictionary<string,string> UsersDOD = DOD.Load(ProjectDir + "/" + "Users.DOD");
@@ -66,6 +83,8 @@ namespace Igtampe.UserTracer {
             //and that's it.
         }
 
+        //-[Methods]------------------------------------------------------------------------------------------------------------------------------------------
+
         /// <summary>saves the UserTrace to a directory</summary>
         /// <param name="ProjectDir"></param>
         public void SaveTrace(string ProjectDir) {
@@ -73,7 +92,7 @@ namespace Igtampe.UserTracer {
             if(!Directory.Exists(ProjectDir + "/images")) { Directory.CreateDirectory(ProjectDir + "/images"); }
             Dictionary<string,string> ProjectDOD = new Dictionary<string,string> {
                 { "name",ServerName },
-                { "date",string.Join("-",ServerStartDate.Year,ServerStartDate.Month,ServerStartDate.Day) },
+                { "date",string.Join("-",ServerCreationDate.Year,ServerCreationDate.Month,ServerCreationDate.Day) },
                 { "root",RootUser.Name }
             };
 
@@ -101,7 +120,8 @@ namespace Igtampe.UserTracer {
             DOD.Save(UsersDOD,ProjectDir + "/" + "Users.DOD");
         }
 
-
+        /// <summary>Generates the trace image. Caches it to TraceImage property before returning it</summary>
+        /// <returns></returns>
         public Image GenerateTraceImage() {
 
             int BaseWidth;
@@ -145,7 +165,7 @@ namespace Igtampe.UserTracer {
             Font BigText = new Font(Arial,48,FontStyle.Bold,GraphicsUnit.Point);
             Font SmallText = new Font(Arial,16,FontStyle.Regular,GraphicsUnit.Point);
 
-            string CreateDateString = "Created: " + ServerStartDate.Month + "/" + ServerStartDate.Day + "/" + ServerStartDate.Year;
+            string CreateDateString = "Created: " + ServerCreationDate.Month + "/" + ServerCreationDate.Day + "/" + ServerCreationDate.Year;
 
             SizeF ServerNameSize = GRD.MeasureString(ServerName,BigText);
 
@@ -160,7 +180,9 @@ namespace Igtampe.UserTracer {
             return traceImage;
         }
 
-        /// <summary>Draws a trace with top left coordinates X and Y</summary>
+        //-[Private Methods]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Draws a trace with top left coordinates X and Y from the provided root user, to each of its sub-users</summary>
         /// <param name="U"></param>
         /// <param name="X"></param>
         /// <param name="Y"></param>
@@ -203,6 +225,10 @@ namespace Igtampe.UserTracer {
 
         }
 
+        /// <summary>Links Users during instantiation.</summary>
+        /// <param name="root"></param>
+        /// <param name="UsersDOD"></param>
+        /// <param name="ProjectDirectory"></param>
         private void LinkUsers(ref User root,ref Dictionary<string,string> UsersDOD, string ProjectDirectory) {
             foreach(string Child in root.LoadedChildrenArray) {
 
@@ -221,6 +247,7 @@ namespace Igtampe.UserTracer {
             }
         }
 
+        //-[Static Methods]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Safely loads an image from the given path</summary>
         /// <returns></returns>
@@ -229,7 +256,6 @@ namespace Igtampe.UserTracer {
             using(var bmpTemp = new Bitmap(Path)) {R = new Bitmap(bmpTemp);}
             return R;
         }
-
 
     }
 }

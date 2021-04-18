@@ -20,8 +20,9 @@ namespace Igtampe.UserTracer {
             Size = new Size(I.Width,I.Height);
         }
 
-        private void PreviewForm_Load(object sender,System.EventArgs e) {
-            Clipboard.SetImage(ImageBox.Image);
-        }
+        /// <summary>Saves the preview to the clipboard because why not</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PreviewForm_Load(object sender,System.EventArgs e) {Clipboard.SetImage(ImageBox.Image);}
     }
 }

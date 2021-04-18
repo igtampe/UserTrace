@@ -1,12 +1,13 @@
 ﻿using System;
-using System.IO;
 using System.Drawing;
 using System.Collections.Generic;
 
 namespace Igtampe.UserTracer {
 
-    /// <summary>Holds a UserTrace Object</summary>
+    /// <summary>Holds a UserTrace User Object</summary>
     public class User {
+
+        //-[Properties]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Name of the user</summary>
         public string Name { get; set; } = "Name";
@@ -44,6 +45,8 @@ namespace Igtampe.UserTracer {
             private set { usercard = value; } 
         }
 
+        //-[Constructor]------------------------------------------------------------------------------------------------------------------------------------------
+
         /// <summary>Default user constructor</summary>
         public User() { }
 
@@ -59,6 +62,8 @@ namespace Igtampe.UserTracer {
             Description = UserStringSplit[4];
             LoadedChildrenArray = UserStringSplit[5].Split('`');
         }
+
+        //-[Methods]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Adds the given user to this user's children</summary>
         /// <param name="U"></param>
@@ -222,6 +227,8 @@ namespace Igtampe.UserTracer {
             //And we're done! Let's see if this works
             return UserCard;
         }
+
+        //-[Overrides]------------------------------------------------------------------------------------------------------------------------------------------
 
         public override bool Equals(object obj) {
             try {

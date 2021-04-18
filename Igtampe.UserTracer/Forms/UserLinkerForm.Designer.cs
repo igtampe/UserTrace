@@ -1,6 +1,6 @@
 ﻿
 namespace Igtampe.UserTracer {
-    partial class AllUsersForm {
+    partial class UserLinkerForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
