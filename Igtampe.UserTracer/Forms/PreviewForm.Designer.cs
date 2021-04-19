@@ -24,10 +24,16 @@ namespace Igtampe.UserTracer {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ImageBox = new System.Windows.Forms.PictureBox();
+            this.PictureMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).BeginInit();
+            this.PictureMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -42,6 +48,7 @@ namespace Igtampe.UserTracer {
             // 
             // ImageBox
             // 
+            this.ImageBox.ContextMenuStrip = this.PictureMenuStrip;
             this.ImageBox.Image = global::Igtampe.UserTracer.Properties.Resources.NoImage;
             this.ImageBox.Location = new System.Drawing.Point(0, 0);
             this.ImageBox.Name = "ImageBox";
@@ -49,6 +56,35 @@ namespace Igtampe.UserTracer {
             this.ImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.ImageBox.TabIndex = 0;
             this.ImageBox.TabStop = false;
+            // 
+            // PictureMenuStrip
+            // 
+            this.PictureMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.PictureMenuStrip.Name = "PictureMenuStrip";
+            this.PictureMenuStrip.Size = new System.Drawing.Size(170, 48);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.copyToolStripMenuItem.Text = "Copy to clipboard";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.saveToolStripMenuItem.Text = "Save to disk";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // ExportFileDialog
+            // 
+            this.ExportFileDialog.DefaultExt = "png";
+            this.ExportFileDialog.FileName = "UserTrace.png";
+            this.ExportFileDialog.Filter = "PNG Files|*.png";
+            this.ExportFileDialog.Title = "Export";
             // 
             // PreviewForm
             // 
@@ -60,10 +96,11 @@ namespace Igtampe.UserTracer {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "PreviewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.PreviewForm_Load);
+            this.Text = "Preview";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
+            this.PictureMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -72,5 +109,9 @@ namespace Igtampe.UserTracer {
 
         private System.Windows.Forms.PictureBox ImageBox;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ContextMenuStrip PictureMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog ExportFileDialog;
     }
 }
