@@ -67,8 +67,15 @@ namespace Igtampe.UserTracer {
                 }
             }
 
+
             UserForm TheForm = new UserForm(NewUser);
             if(TheForm.ShowDialog() != DialogResult.OK) { return; }
+
+            while(MyTrace.AllUsers.Contains(NewUser)) {
+                MessageBox.Show("A user with the name " + NewUser.Name + " already exists! Please use a different name.","Two people?",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                if(TheForm.ShowDialog() != DialogResult.OK) { return; }
+            }
+
 
             NewUser = TheForm.MyUser;
             if(MyTrace.AllUsers.Count == 0) { MyTrace.RootUser = NewUser; }
