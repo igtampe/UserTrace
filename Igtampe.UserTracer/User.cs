@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Igtampe.UserTracer {
 
     /// <summary>Holds a UserTrace User Object</summary>
-    public class User {
+    public class User : IComparable {
 
         //-[Properties]------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -245,6 +245,8 @@ namespace Igtampe.UserTracer {
             return base.GetHashCode();
         }
 
+        public int CompareTo(object obj) {return GetAllSubUsers().Count.CompareTo(obj);}
+
         //-[Static Methods]------------------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Color Distance Calculator provided by FUBO on Stack Overflow<br></br><br></br>
@@ -262,5 +264,14 @@ namespace Igtampe.UserTracer {
             return Math.Sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
         }
 
+
+        //-[Operators]------------------------------------------------------------------------------------------------------------------------------------------
+
+        public static bool operator ==(User left,User right) { if(left is null) { return right is null; } else { return left.Equals(right); } }
+        public static bool operator !=(User left,User right) {return !(left == right);}
+        public static bool operator <(User left,User right) {return left is null ? right is object : left.CompareTo(right) < 0;}
+        public static bool operator <=(User left,User right) {return left is null || left.CompareTo(right) <= 0;}
+        public static bool operator >(User left,User right) {return left is object && left.CompareTo(right) > 0;}
+        public static bool operator >=(User left,User right) {return left is null ? right is null : left.CompareTo(right) >= 0;}
     }
 }
