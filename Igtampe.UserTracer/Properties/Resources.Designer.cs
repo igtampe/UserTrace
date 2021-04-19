@@ -73,6 +73,16 @@ namespace Igtampe.UserTracer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Banner__faint_ {
+            get {
+                object obj = ResourceManager.GetObject("Banner__faint_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NoImage {
             get {
                 object obj = ResourceManager.GetObject("NoImage", resourceCulture);
@@ -96,6 +106,16 @@ namespace Igtampe.UserTracer.Properties {
         internal static System.Drawing.Bitmap UnknownPerson {
             get {
                 object obj = ResourceManager.GetObject("UnknownPerson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UserTrace_Splash {
+            get {
+                object obj = ResourceManager.GetObject("UserTrace_Splash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

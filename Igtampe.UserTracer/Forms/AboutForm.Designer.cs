@@ -54,9 +54,9 @@ namespace Igtampe.UserTracer {
             // 
             this.label1.Location = new System.Drawing.Point(12, 230);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(642, 26);
+            this.label1.Size = new System.Drawing.Size(723, 26);
             this.label1.TabIndex = 2;
-            this.label1.Text = "UserTrace (Version 1.0)\r\n(C)2021 Igtampe, No Rights Reserved\r\n";
+            this.label1.Text = "UserTrace (Version 1.0)\r\n(C)2021 Igtampe, No Rice (or Rights) Reserved\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AboutForm
@@ -64,9 +64,9 @@ namespace Igtampe.UserTracer {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 268);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

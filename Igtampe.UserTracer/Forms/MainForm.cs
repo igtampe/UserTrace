@@ -21,6 +21,9 @@ namespace Igtampe.UserTracer {
         /// <summary>Used to determine if the trace has been modified since it was loaded or last saved</summary>
         private bool Modified = false;
 
+        /// <summary>Splash form to be shown</summary>
+        private SplashForm Splash = new SplashForm();
+
         //-[Constructor]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Default constructor for a MainForm creating a new Trace</summary>
@@ -28,10 +31,17 @@ namespace Igtampe.UserTracer {
         
         /// <summary>Constructor for a mainform editing a pre-existing trace.</summary>
         /// <param name="T"></param>
-        public MainForm(Trace T) { 
+        public MainForm(Trace T) {
             InitializeComponent();
-            LoadTrace(T);
+            MyTrace = T;
+            Splash.Show();
         }
+
+        private void MainForm_Loading(object sender,EventArgs e) {
+            LoadTrace(MyTrace);            
+        }
+
+        private void MainForm_Shown(object sender,EventArgs e) {}
 
         //-[Buttons]------------------------------------------------------------------------------------------------------------------------------------------
 
