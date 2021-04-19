@@ -37,6 +37,8 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OKButton_Click(object sender,EventArgs e) {
+            if(MyUser.Name.ToUpper() == "NAME" || string.IsNullOrWhiteSpace(MyUser.Name)) { MessageBox.Show("Please type a name.","no",MessageBoxButtons.OK,MessageBoxIcon.Error); return; }
+            if(MyUser.Name.ToLower().TrimEnd('.',' ',',') == "a name") { MessageBox.Show("WOAH WOAH WOAH LOOK AT YOU WE'VE GOT A COMEDY GUY HERE\n\nWe're all laughing here, but you still need to put a valid name.","Still no",MessageBoxButtons.OK,MessageBoxIcon.Warning); return; }
             DialogResult = DialogResult.OK;
             Close();
         }
