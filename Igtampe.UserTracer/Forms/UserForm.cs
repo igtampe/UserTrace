@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Igtampe.UserTracer {
@@ -58,10 +60,19 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ColorBox_Click(object sender,EventArgs e) {
+
+            //Load custom colors
+            LoadColors();
+
             if(CardColorPicker.ShowDialog() == DialogResult.OK) {
+
                 ColorBox.BackColor = CardColorPicker.Color;
                 MyUser.HeaderColor = CardColorPicker.Color;
                 GeneratePreview();
+
+                //save custom colors
+                SaveColors();
+
             }
         }
 
@@ -96,6 +107,22 @@ namespace Igtampe.UserTracer {
 
         /// <summary>Generates the preview for the previewform</summary>
         private void GeneratePreview() {PreviewPictureBox.Image = MyUser.GenerateImage();}
+
+        //-[Static Methods]---------------------------------------------------------------------------------------------------------
+
+        private static readonly string ColorsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"UserTracerColors.csv");
+            
+        public static void LoadColors() {
+            if(!File.Exists(ColorsLocation)) { return; }
+
+            List<int> Colors = new List<int>();
+            string[] ColorsArray = File.ReadAllText(ColorsLocation).Split(',');
+
+            foreach(string C in ColorsArray) {Colors.Add(int.Parse(C));}
+            CardColorPicker.CustomColors = Colors.ToArray();
+        
+        }
+        public static void SaveColors() {File.WriteAllText(ColorsLocation,string.Join(",",CardColorPicker.CustomColors));}
 
     }
 }

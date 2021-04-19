@@ -130,6 +130,7 @@ namespace Igtampe.UserTracer {
 
             foreach(User Child in Children) {returnList.AddRange(Child.GetAllSubUsers());} //Add all the users under each of our children
             return returnList;
+
         }
 
         /// <summary>Generates a bitmap to represent this user</summary>
