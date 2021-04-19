@@ -69,8 +69,9 @@ namespace Igtampe.UserTracer {
 
             UserForm TheForm = new UserForm(NewUser);
             if(TheForm.ShowDialog() != DialogResult.OK) { return; }
-            
+
             NewUser = TheForm.MyUser;
+            if(MyTrace.AllUsers.Count == 0) { MyTrace.RootUser = NewUser; }
             MyTrace.AllUsers.Add(NewUser);
             NewUser.Parent?.AddChild(NewUser);
 
@@ -344,7 +345,8 @@ namespace Igtampe.UserTracer {
             RootUserComboBox.Items.Clear();
 
             MyTrace.RebuildList();
-            RecursivePopulate(MyTrace.RootUser,"");
+
+            if(MyTrace.RootUser != null) { RecursivePopulate(MyTrace.RootUser,""); }
 
             //foreach(User U in MyTrace.AllUsers) {
             //    ListViewItem L = new ListViewItem(U.Name);

@@ -180,7 +180,10 @@ namespace Igtampe.UserTracer {
             return traceImage;
         }
 
-        public void RebuildList() {AllUsers = RootUser.GetAllSubUsers();}
+        public void RebuildList() {
+            if(rootuser is null) { AllUsers = new List<User>(); } 
+            else { AllUsers = RootUser?.GetAllSubUsers(); }
+        }
 
         //-[Private Methods]------------------------------------------------------------------------------------------------------------------------------------------
 
