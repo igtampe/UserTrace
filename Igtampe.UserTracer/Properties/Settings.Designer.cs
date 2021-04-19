@@ -22,14 +22,5 @@ namespace Igtampe.UserTracer.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Colors {
-            get {
-                return ((string)(this["Colors"]));
-            }
-        }
     }
 }
