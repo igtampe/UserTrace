@@ -188,7 +188,7 @@ namespace Igtampe.UserTracer {
         /// <param name="Y"></param>
         /// <param name="GRD"></param>
         private void DrawTrace(User U,int X,int Y,Graphics GRD) {
-            if(U.Children.Count == 0) { GRD.DrawImage(U.UserCard,X,Y); return; }
+            if(U.Children.Count == 0) { GRD.DrawImage(U.UserCard,X,Y+5); return; }
 
             //OK now comes the complicated part.
 
@@ -208,6 +208,9 @@ namespace Igtampe.UserTracer {
             DrawX = U.UserCard.Width + 100; //This is now the X at which we will draw the next card.
             DrawY = 0; //we set Y to 5 since we have 5 pixesl of padding up above every child user card.
 
+            //Draw the stub for the arrow:
+            GRD.DrawLine(ArrowPen,ArrowX - 4,ArrowY,ArrowX + 50,ArrowY);
+
             //Now let's draw each child
             foreach(User child in U.Children) {
 
@@ -215,7 +218,8 @@ namespace Igtampe.UserTracer {
                 DrawTrace(child,X+DrawX,Y+DrawY,GRD);
 
                 //Then we're going to draw a line from the middle of the whole root user's middle (plus the width of the original card) to the middle of the total height of the child)
-                GRD.DrawLine(ArrowPen,ArrowX,ArrowY,X + DrawX+4,Y + DrawY + (child.TotalHeight() / 2));
+                GRD.DrawLine(ArrowPen,ArrowX+50,ArrowY,ArrowX+50,Y + DrawY + (child.TotalHeight() / 2)+5);
+                GRD.DrawLine(ArrowPen,ArrowX + 45,Y + DrawY + (child.TotalHeight() / 2)+5,X + DrawX + 4,Y + DrawY + (child.TotalHeight() / 2)+5);
 
                 //Then we're going to increment Y by that child's totalheight, plus 10 pixels in padding
                 DrawY += child.TotalHeight() +10;
