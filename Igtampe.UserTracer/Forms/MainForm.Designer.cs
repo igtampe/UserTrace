@@ -58,23 +58,28 @@ namespace Igtampe.UserTracer {
             this.UserListView = new System.Windows.Forms.ListView();
             this.UserName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChildNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
-            this.ProfilePicturePicker = new System.Windows.Forms.OpenFileDialog();
-            this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.ProjectDirPicker = new System.Windows.Forms.FolderBrowserDialog();
             this.UsersContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newUnderThisUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
+            this.ProfilePicturePicker = new System.Windows.Forms.OpenFileDialog();
+            this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.ProjectDirPicker = new System.Windows.Forms.FolderBrowserDialog();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.UsersContextMenu.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).BeginInit();
-            this.UsersContextMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,7 +89,7 @@ namespace Igtampe.UserTracer {
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1376, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1326, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,7 +115,7 @@ namespace Igtampe.UserTracer {
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
             // 
@@ -120,14 +125,14 @@ namespace Igtampe.UserTracer {
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -135,40 +140,40 @@ namespace Igtampe.UserTracer {
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printToolStripMenuItem.Text = "&Export";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.PrintToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -196,9 +201,9 @@ namespace Igtampe.UserTracer {
             this.groupBox1.Controls.Add(this.PFPPictureBox);
             this.groupBox1.Controls.Add(this.CreatedDateTimePicker);
             this.groupBox1.Controls.Add(this.NameBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(348, 121);
+            this.groupBox1.Size = new System.Drawing.Size(352, 111);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server Info";
@@ -229,6 +234,7 @@ namespace Igtampe.UserTracer {
             this.TileBG.Size = new System.Drawing.Size(64, 23);
             this.TileBG.TabIndex = 9;
             this.TileBG.Text = "Tile Image";
+            this.toolTip1.SetToolTip(this.TileBG, "Choose an image to tile in the background");
             this.TileBG.UseVisualStyleBackColor = true;
             this.TileBG.Click += new System.EventHandler(this.TileBG_Click);
             // 
@@ -272,21 +278,18 @@ namespace Igtampe.UserTracer {
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.LinkButton);
-            this.groupBox2.Controls.Add(this.EditButton);
-            this.groupBox2.Controls.Add(this.DeleteButton);
-            this.groupBox2.Controls.Add(this.AddButton);
-            this.groupBox2.Controls.Add(this.UserListView);
-            this.groupBox2.Location = new System.Drawing.Point(12, 154);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 123);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(348, 422);
+            this.groupBox2.Size = new System.Drawing.Size(352, 458);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Users";
             // 
             // LinkButton
             // 
-            this.LinkButton.Location = new System.Drawing.Point(182, 393);
+            this.LinkButton.Location = new System.Drawing.Point(175, 412);
             this.LinkButton.Name = "LinkButton";
             this.LinkButton.Size = new System.Drawing.Size(75, 23);
             this.LinkButton.TabIndex = 4;
@@ -296,7 +299,7 @@ namespace Igtampe.UserTracer {
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(101, 393);
+            this.EditButton.Location = new System.Drawing.Point(89, 412);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(75, 23);
             this.EditButton.TabIndex = 3;
@@ -306,7 +309,7 @@ namespace Igtampe.UserTracer {
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(263, 393);
+            this.DeleteButton.Location = new System.Drawing.Point(261, 412);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteButton.TabIndex = 2;
@@ -316,7 +319,7 @@ namespace Igtampe.UserTracer {
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(20, 393);
+            this.AddButton.Location = new System.Drawing.Point(3, 412);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 1;
@@ -329,15 +332,17 @@ namespace Igtampe.UserTracer {
             this.UserListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.UserName,
             this.ChildNumber});
+            this.tableLayoutPanel2.SetColumnSpan(this.UserListView, 4);
             this.UserListView.ContextMenuStrip = this.UsersContextMenu;
+            this.UserListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UserListView.FullRowSelect = true;
             this.UserListView.HideSelection = false;
             this.UserListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.UserListView.Location = new System.Drawing.Point(6, 19);
+            this.UserListView.Location = new System.Drawing.Point(3, 3);
             this.UserListView.MultiSelect = false;
             this.UserListView.Name = "UserListView";
-            this.UserListView.Size = new System.Drawing.Size(332, 368);
+            this.UserListView.Size = new System.Drawing.Size(340, 403);
             this.UserListView.TabIndex = 0;
             this.UserListView.UseCompatibleStateImageBehavior = false;
             this.UserListView.View = System.Windows.Forms.View.Details;
@@ -353,39 +358,6 @@ namespace Igtampe.UserTracer {
             // 
             this.ChildNumber.Text = "Number of Subusers";
             this.ChildNumber.Width = 108;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.PreviewPictureBox);
-            this.groupBox3.Location = new System.Drawing.Point(366, 27);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(998, 549);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Preview";
-            // 
-            // PreviewPictureBox
-            // 
-            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Banner;
-            this.PreviewPictureBox.Location = new System.Drawing.Point(6, 19);
-            this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(986, 524);
-            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PreviewPictureBox.TabIndex = 0;
-            this.PreviewPictureBox.TabStop = false;
-            this.PreviewPictureBox.Click += new System.EventHandler(this.PreviewPictureBox_Click);
-            // 
-            // ProfilePicturePicker
-            // 
-            this.ProfilePicturePicker.FileName = "Pfp.png";
-            this.ProfilePicturePicker.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp|All Files|*.*";
-            // 
-            // ExportFileDialog
-            // 
-            this.ExportFileDialog.DefaultExt = "png";
-            this.ExportFileDialog.FileName = "UserTrace.png";
-            this.ExportFileDialog.Filter = "PNG Files|*.png";
-            this.ExportFileDialog.Title = "Export";
             // 
             // UsersContextMenu
             // 
@@ -425,20 +397,89 @@ namespace Igtampe.UserTracer {
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.PreviewPictureBox);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(361, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.tableLayoutPanel1.SetRowSpan(this.groupBox3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(962, 578);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Preview";
+            // 
+            // PreviewPictureBox
+            // 
+            this.PreviewPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Banner;
+            this.PreviewPictureBox.Location = new System.Drawing.Point(3, 16);
+            this.PreviewPictureBox.Name = "PreviewPictureBox";
+            this.PreviewPictureBox.Size = new System.Drawing.Size(956, 559);
+            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviewPictureBox.TabIndex = 0;
+            this.PreviewPictureBox.TabStop = false;
+            this.PreviewPictureBox.Click += new System.EventHandler(this.PreviewPictureBox_Click);
+            // 
+            // ProfilePicturePicker
+            // 
+            this.ProfilePicturePicker.FileName = "Pfp.png";
+            this.ProfilePicturePicker.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp|All Files|*.*";
+            // 
+            // ExportFileDialog
+            // 
+            this.ExportFileDialog.DefaultExt = "png";
+            this.ExportFileDialog.FileName = "UserTrace.png";
+            this.ExportFileDialog.Filter = "PNG Files|*.png";
+            this.ExportFileDialog.Title = "Export";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 358F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1326, 584);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.AddButton, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.DeleteButton, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.LinkButton, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.EditButton, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.UserListView, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(346, 439);
+            this.tableLayoutPanel2.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1376, 588);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1326, 608);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1392, 627);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserTracer - New File";
@@ -449,9 +490,11 @@ namespace Igtampe.UserTracer {
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.UsersContextMenu.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).EndInit();
-            this.UsersContextMenu.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,6 +541,9 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reLinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
