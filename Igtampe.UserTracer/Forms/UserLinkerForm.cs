@@ -32,8 +32,18 @@ namespace Igtampe.UserTracer {
             myUser = U; 
             allUsers = AllUsers;
 
-            foreach(User N in allUsers) {comboBox1.Items.Add(N.Name);}
+            RecursivePopulate(AllUsers[0],"");
         }
+
+        /// <summary>Recursively populates the list-view and combobox, adding indents to see the tree structure on the text</summary>
+        /// <param name="U"></param>
+        /// <param name="Prefix"></param>
+        private void RecursivePopulate(User U,string Prefix) {
+
+            comboBox1.Items.Add(Prefix + "-" + U.Name);
+            foreach(User Child in U.Children) { RecursivePopulate(Child,Prefix + "|     "); }
+        }
+
 
         //-[Buttons]------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -42,21 +42,19 @@ namespace Igtampe.UserTracer {
         /// <param name="e"></param>
         private void AddButton_Click(object sender,EventArgs e) {
             User NewUser = new User();
+            
             if(MyTrace.AllUsers.Count == 0) {
                 MessageBox.Show("Since this is the first user, this will be the root user.\n\nThis can be changed later, but you may lose users before the root user if you save","Root User Notice",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            } else { 
-                UserLinkerForm Linker = new UserLinkerForm(NewUser,MyTrace.AllUsers);
-                if(Linker.ShowDialog() != DialogResult.OK) {return;}
+            } else {
+                if("TRC".Equals(sender)|| AddUnder()) {
+                    if(GetSelectedIndex() == -1) { return; }
+                    NewUser.Parent = MyTrace.AllUsers[GetSelectedIndex()];
 
-                User Parent = MyTrace.AllUsers[Linker.ListIndex];
-
-                //find the parent and link it.
-                //Delink the user from the old parent
-                NewUser.Parent?.RemoveChild(NewUser);
-                NewUser.Parent = null;
-
-                //Link the new parent.
-                NewUser.Parent = Parent;
+                } else {
+                    UserLinkerForm Linker = new UserLinkerForm(NewUser,MyTrace.AllUsers);
+                    if(Linker.ShowDialog() != DialogResult.OK) { return; }
+                    NewUser.Parent = MyTrace.AllUsers[Linker.ListIndex];
+                }
             }
 
             UserForm TheForm = new UserForm(NewUser);
@@ -177,6 +175,13 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PreviewPictureBox_Click(object sender,EventArgs e) { new PreviewForm(MyTrace.TraceImage).ShowDialog(); }
+
+        //-[Context Menu Items]------------------------------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>Creates a new user under the user that was right clicked</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewUnderThisUserToolStripMenuItem_Click(object sender,EventArgs e) { AddButton_Click("TRC",e); }
 
         //-[Toolstrip Menu Items]------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -299,34 +304,61 @@ namespace Igtampe.UserTracer {
         /// <summary>Asks the UserTrace to regenerate the image, and to display it.</summary>
         private void GeneratePreview() {PreviewPictureBox.Image = MyTrace.GenerateTraceImage();}
 
+        /// <summary>checks if a user is selected, and if it is desired to add a new user under the selected one</summary>
+        /// <returns></returns>
+        private bool AddUnder() {
+            if(GetSelectedIndex(false) == -1) { return false; }
+            if(MessageBox.Show("Add new user under " + MyTrace.AllUsers[GetSelectedIndex()].Name + "?","Do?",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes) { return true; }
+            return false;
+        }
+
+        /// <summary>Gets selected index of the user Listview, showing an error if nothing is selected</summary>
+        /// <returns></returns>
+        private int GetSelectedIndex() { return GetSelectedIndex(true); }
+
         /// <summary>Gets the selected index of the user listview</summary>
         /// <returns></returns>
-        private int GetSelectedIndex() {
-            if(listView1.SelectedIndices.Count == 0) {
-                MessageBox.Show("Please select an index before using this button","no",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        private int GetSelectedIndex(bool showError) {
+            if(UserListView.SelectedIndices.Count == 0) {
+                if(showError) { MessageBox.Show("Please select an index before using this button","no",MessageBoxButtons.OK,MessageBoxIcon.Error); }
                 return - 1; 
             }
-            return listView1.SelectedIndices[0]; 
+            return UserListView.SelectedIndices[0]; 
         }
 
         /// <summary>Populates the listview and combobox with all users in the UserTrace</summary>
         private void PopulateListview() {
 
-            listView1.Items.Clear();
+            UserListView.Items.Clear();
             RootUserComboBox.Items.Clear();
 
-            foreach(User U in MyTrace.AllUsers) {
-                ListViewItem L = new ListViewItem(U.Name);
-                L.SubItems.Add(U.Children.Count.ToString());
-                listView1.Items.Add(L);
+            MyTrace.RebuildList();
+            RecursivePopulate(MyTrace.RootUser,"");
 
-                RootUserComboBox.Items.Add(U.Name);
+            //foreach(User U in MyTrace.AllUsers) {
+            //    ListViewItem L = new ListViewItem(U.Name);
+            //    L.SubItems.Add(U.Children.Count.ToString());
+            //    listView1.Items.Add(L);
 
-            }
+            //    RootUserComboBox.Items.Add(U.Name);
+
+            //}
 
             RootUserComboBox.Text = MyTrace.RootUser?.Name;
 
             ModifyButtons(false);
+        }
+
+        /// <summary>Recursively populates the list-view and combobox, adding indents to see the tree structure on the text</summary>
+        /// <param name="U"></param>
+        /// <param name="Prefix"></param>
+        private void RecursivePopulate(User U, string Prefix) {
+
+            ListViewItem L = new ListViewItem(Prefix+""+U.Name);
+            L.SubItems.Add(U.Children.Count.ToString());
+            UserListView.Items.Add(L);
+            RootUserComboBox.Items.Add(Prefix + "-" + U.Name);
+            foreach(User Child in U.Children) {RecursivePopulate(Child,Prefix+"|     ");}
         }
 
         /// <summary>Handles the closing of the form</summary>

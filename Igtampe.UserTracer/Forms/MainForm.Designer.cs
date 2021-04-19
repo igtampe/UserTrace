@@ -24,13 +24,17 @@ namespace Igtampe.UserTracer {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Professor Chopo",
             "20"}, -1);
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +47,7 @@ namespace Igtampe.UserTracer {
             this.label2 = new System.Windows.Forms.Label();
             this.TileBG = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.PFPPictureBox = new System.Windows.Forms.PictureBox();
             this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.NameBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -50,24 +55,26 @@ namespace Igtampe.UserTracer {
             this.EditButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.UserListView = new System.Windows.Forms.ListView();
             this.UserName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChildNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.ProfilePicturePicker = new System.Windows.Forms.OpenFileDialog();
             this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ProjectDirPicker = new System.Windows.Forms.FolderBrowserDialog();
-            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
-            this.PFPPictureBox = new System.Windows.Forms.PictureBox();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UsersContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newUnderThisUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
+            this.UsersContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -97,10 +104,40 @@ namespace Igtampe.UserTracer {
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -204,6 +241,17 @@ namespace Igtampe.UserTracer {
             this.label1.TabIndex = 8;
             this.label1.Text = "Created";
             // 
+            // PFPPictureBox
+            // 
+            this.PFPPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.UnknownPerson;
+            this.PFPPictureBox.Location = new System.Drawing.Point(6, 19);
+            this.PFPPictureBox.Name = "PFPPictureBox";
+            this.PFPPictureBox.Size = new System.Drawing.Size(64, 64);
+            this.PFPPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PFPPictureBox.TabIndex = 7;
+            this.PFPPictureBox.TabStop = false;
+            this.PFPPictureBox.Click += new System.EventHandler(this.PFPPictureBox_Click);
+            // 
             // CreatedDateTimePicker
             // 
             this.CreatedDateTimePicker.Location = new System.Drawing.Point(134, 64);
@@ -228,7 +276,7 @@ namespace Igtampe.UserTracer {
             this.groupBox2.Controls.Add(this.EditButton);
             this.groupBox2.Controls.Add(this.DeleteButton);
             this.groupBox2.Controls.Add(this.AddButton);
-            this.groupBox2.Controls.Add(this.listView1);
+            this.groupBox2.Controls.Add(this.UserListView);
             this.groupBox2.Location = new System.Drawing.Point(12, 154);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(348, 422);
@@ -276,24 +324,25 @@ namespace Igtampe.UserTracer {
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // listView1
+            // UserListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.UserListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.UserName,
             this.ChildNumber});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.UserListView.ContextMenuStrip = this.UsersContextMenu;
+            this.UserListView.FullRowSelect = true;
+            this.UserListView.HideSelection = false;
+            this.UserListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(6, 19);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(332, 368);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.UserListView_SelectedIndexChange);
-            this.listView1.DoubleClick += new System.EventHandler(this.EditButton_Click);
+            this.UserListView.Location = new System.Drawing.Point(6, 19);
+            this.UserListView.MultiSelect = false;
+            this.UserListView.Name = "UserListView";
+            this.UserListView.Size = new System.Drawing.Size(332, 368);
+            this.UserListView.TabIndex = 0;
+            this.UserListView.UseCompatibleStateImageBehavior = false;
+            this.UserListView.View = System.Windows.Forms.View.Details;
+            this.UserListView.SelectedIndexChanged += new System.EventHandler(this.UserListView_SelectedIndexChange);
+            this.UserListView.DoubleClick += new System.EventHandler(this.EditButton_Click);
             // 
             // UserName
             // 
@@ -315,6 +364,17 @@ namespace Igtampe.UserTracer {
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Preview";
             // 
+            // PreviewPictureBox
+            // 
+            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Banner;
+            this.PreviewPictureBox.Location = new System.Drawing.Point(6, 19);
+            this.PreviewPictureBox.Name = "PreviewPictureBox";
+            this.PreviewPictureBox.Size = new System.Drawing.Size(986, 524);
+            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviewPictureBox.TabIndex = 0;
+            this.PreviewPictureBox.TabStop = false;
+            this.PreviewPictureBox.Click += new System.EventHandler(this.PreviewPictureBox_Click);
+            // 
             // ProfilePicturePicker
             // 
             this.ProfilePicturePicker.FileName = "Pfp.png";
@@ -327,57 +387,43 @@ namespace Igtampe.UserTracer {
             this.ExportFileDialog.Filter = "PNG Files|*.png";
             this.ExportFileDialog.Title = "Export";
             // 
-            // PreviewPictureBox
+            // UsersContextMenu
             // 
-            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Banner;
-            this.PreviewPictureBox.Location = new System.Drawing.Point(6, 19);
-            this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(986, 524);
-            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PreviewPictureBox.TabIndex = 0;
-            this.PreviewPictureBox.TabStop = false;
-            this.PreviewPictureBox.Click += new System.EventHandler(this.PreviewPictureBox_Click);
+            this.UsersContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newUnderThisUserToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.reLinkToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.UsersContextMenu.Name = "contextMenuStrip1";
+            this.UsersContextMenu.Size = new System.Drawing.Size(180, 92);
             // 
-            // PFPPictureBox
+            // newUnderThisUserToolStripMenuItem
             // 
-            this.PFPPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.UnknownPerson;
-            this.PFPPictureBox.Location = new System.Drawing.Point(6, 19);
-            this.PFPPictureBox.Name = "PFPPictureBox";
-            this.PFPPictureBox.Size = new System.Drawing.Size(64, 64);
-            this.PFPPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PFPPictureBox.TabIndex = 7;
-            this.PFPPictureBox.TabStop = false;
-            this.PFPPictureBox.Click += new System.EventHandler(this.PFPPictureBox_Click);
+            this.newUnderThisUserToolStripMenuItem.Name = "newUnderThisUserToolStripMenuItem";
+            this.newUnderThisUserToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.newUnderThisUserToolStripMenuItem.Text = "New under this user";
+            this.newUnderThisUserToolStripMenuItem.Click += new System.EventHandler(this.NewUnderThisUserToolStripMenuItem_Click);
             // 
-            // newToolStripMenuItem
+            // editToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.newToolStripMenuItem.Text = "&New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.EditButton_Click);
             // 
-            // openToolStripMenuItem
+            // reLinkToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.openToolStripMenuItem.Text = "&Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            this.reLinkToolStripMenuItem.Name = "reLinkToolStripMenuItem";
+            this.reLinkToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.reLinkToolStripMenuItem.Text = "Re-Link";
+            this.reLinkToolStripMenuItem.Click += new System.EventHandler(this.LinkButton_Click);
             // 
-            // saveToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // MainForm
             // 
@@ -396,17 +442,18 @@ namespace Igtampe.UserTracer {
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserTracer - New File";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingHandler);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
+            this.UsersContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(ClosingHandler);
 
         }
 
@@ -431,7 +478,7 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;
         private System.Windows.Forms.TextBox NameBox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView UserListView;
         private System.Windows.Forms.ColumnHeader UserName;
         private System.Windows.Forms.ColumnHeader ChildNumber;
         private System.Windows.Forms.Button AddButton;
@@ -446,6 +493,11 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.OpenFileDialog ProfilePicturePicker;
         private System.Windows.Forms.SaveFileDialog ExportFileDialog;
         private System.Windows.Forms.FolderBrowserDialog ProjectDirPicker;
+        private System.Windows.Forms.ContextMenuStrip UsersContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem newUnderThisUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reLinkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 

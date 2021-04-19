@@ -180,6 +180,8 @@ namespace Igtampe.UserTracer {
             return traceImage;
         }
 
+        public void RebuildList() {AllUsers = RootUser.GetAllSubUsers();}
+
         //-[Private Methods]------------------------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>Draws a trace with top left coordinates X and Y from the provided root user, to each of its sub-users</summary>
