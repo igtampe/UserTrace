@@ -182,7 +182,7 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.DateTimePicker JoinDateTimePicker;
         private System.Windows.Forms.PictureBox PFPPictureBox;
         private System.Windows.Forms.TextBox ColorBox;
-        private static System.Windows.Forms.ColorDialog CardColorPicker = new System.Windows.Forms.ColorDialog() {
+        public static System.Windows.Forms.ColorDialog CardColorPicker = new System.Windows.Forms.ColorDialog() {
             AnyColor = true,
             Color= System.Drawing.Color.DarkRed
         };

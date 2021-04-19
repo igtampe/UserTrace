@@ -69,11 +69,10 @@ namespace Igtampe.UserTracer {
                 ColorBox.BackColor = CardColorPicker.Color;
                 MyUser.HeaderColor = CardColorPicker.Color;
                 GeneratePreview();
-
-                //save custom colors
-                SaveColors();
-
             }
+
+            //save custom colors
+            SaveColors();
         }
 
         /// <summary>Picks and sets a profile picture for this user</summary>

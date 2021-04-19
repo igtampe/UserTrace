@@ -150,8 +150,8 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PFPPictureBox_Click(object sender,EventArgs e) {
-            if(ProfilePicturePicker.ShowDialog() == DialogResult.OK) {
-                Image NewPFP = new Bitmap(ProfilePicturePicker.FileName);
+            if(ImagePicker.ShowDialog() == DialogResult.OK) {
+                Image NewPFP = Trace.SafeLoadImage(ImagePicker.FileName);
                 PFPPictureBox.Image = NewPFP;
                 MyTrace.ServerLogo = NewPFP;
                 GeneratePreview();
@@ -163,8 +163,9 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TileBG_Click(object sender,EventArgs e) {
-            if(ProfilePicturePicker.ShowDialog() == DialogResult.OK) {
-                Image NewPFP = new Bitmap(ProfilePicturePicker.FileName);
+            BackgroundOptionsForm BGForm = new BackgroundOptionsForm(MyTrace.TileBackground);
+            if(BGForm.ShowDialog() == DialogResult.OK) {
+                Image NewPFP = BGForm.TileBackground;
                 MyTrace.TileBackground = NewPFP;
                 GeneratePreview();
                 Modified = true;
