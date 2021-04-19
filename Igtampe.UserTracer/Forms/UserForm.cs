@@ -25,6 +25,7 @@ namespace Igtampe.UserTracer {
             PFPPictureBox.Image = U.PFP;
             JoinDateTimePicker.Value = U.JoinDate;
             ColorBox.BackColor = U.HeaderColor;
+            CardColorPicker.Color = U.HeaderColor;
             DescriptionBox.Text = U.Description;
         }
 

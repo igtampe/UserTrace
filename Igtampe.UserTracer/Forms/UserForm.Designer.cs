@@ -27,7 +27,6 @@ namespace Igtampe.UserTracer {
             this.NameBox = new System.Windows.Forms.TextBox();
             this.JoinDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ColorBox = new System.Windows.Forms.TextBox();
-            this.CardColorPicker = new System.Windows.Forms.ColorDialog();
             this.ProfilePicturePicker = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.OKButton = new System.Windows.Forms.Button();
@@ -70,11 +69,6 @@ namespace Igtampe.UserTracer {
             this.ColorBox.Size = new System.Drawing.Size(332, 20);
             this.ColorBox.TabIndex = 3;
             this.ColorBox.Click += new System.EventHandler(this.ColorBox_Click);
-            // 
-            // CardColorPicker
-            // 
-            this.CardColorPicker.AnyColor = true;
-            this.CardColorPicker.Color = System.Drawing.Color.DarkRed;
             // 
             // ProfilePicturePicker
             // 
@@ -188,7 +182,10 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.DateTimePicker JoinDateTimePicker;
         private System.Windows.Forms.PictureBox PFPPictureBox;
         private System.Windows.Forms.TextBox ColorBox;
-        private System.Windows.Forms.ColorDialog CardColorPicker;
+        private static System.Windows.Forms.ColorDialog CardColorPicker = new System.Windows.Forms.ColorDialog() {
+            AnyColor = true,
+            Color= System.Drawing.Color.DarkRed
+        };
         private System.Windows.Forms.OpenFileDialog ProfilePicturePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button OKButton;
