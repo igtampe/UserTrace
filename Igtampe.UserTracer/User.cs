@@ -204,7 +204,11 @@ namespace Igtampe.UserTracer {
 
             //First things first, we have to decide if we're going to use white or black.
             TheBrush.Dispose();
-            if(HeaderColor.GetBrightness() >= 0.5) { TheBrush = new SolidBrush(Color.Black); } else { TheBrush = new SolidBrush(Color.White); }
+
+            double DistanceToBlack = ColourDistance(Color.Black,HeaderColor);
+            double DistanceToWhite = ColourDistance(Color.White,HeaderColor);
+
+            if(DistanceToBlack>DistanceToWhite) { TheBrush = new SolidBrush(Color.Black); } else { TheBrush = new SolidBrush(Color.White); }
 
             //Now let's draw. The name should be approximately 30 +64 (the rightmost point of the image) + 15 (padding), 20 (upper point of the image) + 6 (padding)
             Handler.DrawString(Name,BigText,TheBrush,30 + 64 + 15-6,6+20);
@@ -239,6 +243,23 @@ namespace Igtampe.UserTracer {
 
         public override int GetHashCode() {
             return base.GetHashCode();
+        }
+
+        //-[Static Methods]------------------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Color Distance Calculator provided by FUBO on Stack Overflow<br></br><br></br>
+        /// 
+        /// See: https://stackoverflow.com/questions/3968179/compare-rgb-colors-in-c-sharp
+        /// </summary>
+        /// <param name="e1"></param>
+        /// <param name="e2"></param>
+        /// <returns></returns>
+        public static double ColourDistance(Color e1,Color e2) {
+            long rmean = ((long)e1.R + (long)e2.R) / 2;
+            long r = (long)e1.R - (long)e2.R;
+            long g = (long)e1.G - (long)e2.G;
+            long b = (long)e1.B - (long)e2.B;
+            return Math.Sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
         }
 
     }

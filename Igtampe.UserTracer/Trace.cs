@@ -158,7 +158,7 @@ namespace Igtampe.UserTracer {
             Image SmolServerLogo = new Bitmap(ServerLogo,128,128);
             GRD.DrawImage(SmolServerLogo,10,10);
 
-            Brush TheBrush = new SolidBrush(Color.Black);
+            Brush TheBrush = new SolidBrush(Color.White);
 
             FontFamily Arial = new FontFamily("Arial");
 
