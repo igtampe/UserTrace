@@ -67,7 +67,7 @@ namespace Igtampe.UserTracer {
 
         /// <summary>Adds the given user to this user's children</summary>
         /// <param name="U"></param>
-        public void AddChild(User U) {Children.Add(U);}
+        public void AddChild(User U) {Children.Add(U); Children.Sort(); }
 
         /// <summary>Removes the given user from this User's children</summary>
         /// <param name="U"></param>
@@ -237,7 +237,7 @@ namespace Igtampe.UserTracer {
         public override bool Equals(object obj) {
             try {
                 User OtherUser = (User)obj;
-                return OtherUser.Name == Name;
+                return OtherUser?.Name == Name;
             } catch(Exception) {return base.Equals(obj);}
         }
 
@@ -245,7 +245,12 @@ namespace Igtampe.UserTracer {
             return base.GetHashCode();
         }
 
-        public int CompareTo(object obj) {return GetAllSubUsers().Count.CompareTo(obj);}
+        public int CompareTo(object obj) {
+            if(!(obj is User)) {throw new ArgumentException("Object is not another User!!!");}
+            User Other = (User)obj;
+
+            return Other.GetAllSubUsers().Count.CompareTo(GetAllSubUsers().Count);
+        }
 
         //-[Static Methods]------------------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
