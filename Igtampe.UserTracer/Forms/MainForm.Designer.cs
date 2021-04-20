@@ -25,13 +25,16 @@ namespace Igtampe.UserTracer {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Professor Chopo",
             "20"}, -1);
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +47,7 @@ namespace Igtampe.UserTracer {
             this.label2 = new System.Windows.Forms.Label();
             this.TileBG = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.PFPPictureBox = new System.Windows.Forms.PictureBox();
             this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.NameBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -60,26 +64,25 @@ namespace Igtampe.UserTracer {
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BGOptionsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bGOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeServerIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.ImagePicker = new System.Windows.Forms.OpenFileDialog();
             this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ProjectDirPicker = new System.Windows.Forms.FolderBrowserDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
-            this.PFPPictureBox = new System.Windows.Forms.PictureBox();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.UsersContextMenu.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -109,41 +112,71 @@ namespace Igtampe.UserTracer {
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.printToolStripMenuItem.Text = "&Export";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.PrintToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -158,7 +191,7 @@ namespace Igtampe.UserTracer {
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -222,6 +255,18 @@ namespace Igtampe.UserTracer {
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Created";
+            // 
+            // PFPPictureBox
+            // 
+            this.PFPPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.UnknownPerson;
+            this.PFPPictureBox.Location = new System.Drawing.Point(6, 19);
+            this.PFPPictureBox.Name = "PFPPictureBox";
+            this.PFPPictureBox.Size = new System.Drawing.Size(64, 64);
+            this.PFPPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PFPPictureBox.TabIndex = 7;
+            this.PFPPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.PFPPictureBox, "Click me to change the server icon");
+            this.PFPPictureBox.Click += new System.EventHandler(this.PFPPictureBox_Click);
             // 
             // CreatedDateTimePicker
             // 
@@ -354,9 +399,13 @@ namespace Igtampe.UserTracer {
             this.newUnderThisUserToolStripMenuItem,
             this.editToolStripMenuItem,
             this.reLinkToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.BGOptionsToolStripSeparator,
+            this.bGOptionsToolStripMenuItem,
+            this.changeServerIconToolStripMenuItem});
             this.UsersContextMenu.Name = "contextMenuStrip1";
-            this.UsersContextMenu.Size = new System.Drawing.Size(180, 92);
+            this.UsersContextMenu.Size = new System.Drawing.Size(180, 142);
+            this.UsersContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.UsersContextMenu_Opening);
             // 
             // newUnderThisUserToolStripMenuItem
             // 
@@ -386,6 +435,25 @@ namespace Igtampe.UserTracer {
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
+            // BGOptionsToolStripSeparator
+            // 
+            this.BGOptionsToolStripSeparator.Name = "BGOptionsToolStripSeparator";
+            this.BGOptionsToolStripSeparator.Size = new System.Drawing.Size(176, 6);
+            // 
+            // bGOptionsToolStripMenuItem
+            // 
+            this.bGOptionsToolStripMenuItem.Name = "bGOptionsToolStripMenuItem";
+            this.bGOptionsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.bGOptionsToolStripMenuItem.Text = "BG Options";
+            this.bGOptionsToolStripMenuItem.Click += new System.EventHandler(this.TileBG_Click);
+            // 
+            // changeServerIconToolStripMenuItem
+            // 
+            this.changeServerIconToolStripMenuItem.Name = "changeServerIconToolStripMenuItem";
+            this.changeServerIconToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.changeServerIconToolStripMenuItem.Text = "Change Server Icon";
+            this.changeServerIconToolStripMenuItem.Click += new System.EventHandler(this.PFPPictureBox_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.PreviewPictureBox);
@@ -397,6 +465,22 @@ namespace Igtampe.UserTracer {
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Preview";
+            // 
+            // PreviewPictureBox
+            // 
+            this.PreviewPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.PreviewPictureBox.BackgroundImage = global::Igtampe.UserTracer.Properties.Resources.Banner__faint_;
+            this.PreviewPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PreviewPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Sandstone;
+            this.PreviewPictureBox.Location = new System.Drawing.Point(3, 16);
+            this.PreviewPictureBox.Name = "PreviewPictureBox";
+            this.PreviewPictureBox.Size = new System.Drawing.Size(949, 559);
+            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PreviewPictureBox.TabIndex = 0;
+            this.PreviewPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.PreviewPictureBox, "Too small? Click me for a full size preview");
+            this.PreviewPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PreviewPictureBox_Click);
             // 
             // ImagePicker
             // 
@@ -427,64 +511,6 @@ namespace Igtampe.UserTracer {
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1326, 584);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // PreviewPictureBox
-            // 
-            this.PreviewPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.PreviewPictureBox.BackgroundImage = global::Igtampe.UserTracer.Properties.Resources.Banner__faint_;
-            this.PreviewPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PreviewPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Sandstone;
-            this.PreviewPictureBox.Location = new System.Drawing.Point(3, 16);
-            this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(949, 559);
-            this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PreviewPictureBox.TabIndex = 0;
-            this.PreviewPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.PreviewPictureBox, "Too small? Click me for a full size preview");
-            this.PreviewPictureBox.Click += new System.EventHandler(this.PreviewPictureBox_Click);
-            // 
-            // PFPPictureBox
-            // 
-            this.PFPPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.UnknownPerson;
-            this.PFPPictureBox.Location = new System.Drawing.Point(6, 19);
-            this.PFPPictureBox.Name = "PFPPictureBox";
-            this.PFPPictureBox.Size = new System.Drawing.Size(64, 64);
-            this.PFPPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PFPPictureBox.TabIndex = 7;
-            this.PFPPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.PFPPictureBox, "Click me to change the server icon");
-            this.PFPPictureBox.Click += new System.EventHandler(this.PFPPictureBox_Click);
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem.Text = "&New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "&Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,13 +530,13 @@ namespace Igtampe.UserTracer {
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.UsersContextMenu.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,6 +586,9 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripSeparator BGOptionsToolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem bGOptionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeServerIconToolStripMenuItem;
     }
 }
 

@@ -37,9 +37,7 @@ namespace Igtampe.UserTracer {
             Splash.Show();
         }
 
-        private void MainForm_Loading(object sender,EventArgs e) {
-            LoadTrace(MyTrace);            
-        }
+        private void MainForm_Loading(object sender,EventArgs e) {LoadTrace(MyTrace);            }
 
         private void MainForm_Shown(object sender,EventArgs e) {}
 
@@ -92,7 +90,7 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void EditButton_Click(object sender,EventArgs e) {
-
+            
             if(GetSelectedIndex() == -1) { return; }
 
             UserForm TheForm = new UserForm(MyTrace.AllUsers[GetSelectedIndex()]);
@@ -193,9 +191,146 @@ namespace Igtampe.UserTracer {
         /// <summary>Handles creating a previewform for the UserTrace image</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PreviewPictureBox_Click(object sender,EventArgs e) { new PreviewForm(MyTrace.TraceImage).ShowDialog(); }
+        private void PreviewPictureBox_Click(object sender,MouseEventArgs e) {
+            if(e.Button != MouseButtons.Right && e.Button!=MouseButtons.Left) { return; }
+
+            fromPreviewPane = true;
+
+            //If the usertrace is empty, just show it anyways.
+            if(MyTrace.AllUsers.Count == 0 && e.Button==MouseButtons.Right) { UsersContextMenu.Show(PreviewPictureBox,e.Location); fromPreviewPane = false; return; }
+
+            //Let's find the top right corner of the image. 
+            Size ImageSize = PreviewPictureBox.Image.Size;
+            Size BoxSize = PreviewPictureBox.Size;
+            Size RealImageSize = PreviewPictureBox.Size;
+
+            int PictureX = 0;
+            int PictureY = 0;
+            double scale = 1;
+
+            //Get the aspect ratio of the picturebox and image.
+            double BoxWidthToHeight = (BoxSize.Width +0.0) / (BoxSize.Height + 0.0);
+            double ImageWidthToHeight = (ImageSize.Width + 0.0) / (ImageSize.Height + 0.0);
+
+            if(ImageSize.Equals(BoxSize)) {
+                //do nothing the thing is set.
+            } else if(ImageWidthToHeight > BoxWidthToHeight) {
+                //Find the correct Y
+                //It's wider than it's tall
+                
+                //determine the scale
+                scale = (ImageSize.Width+0.0) / (BoxSize.Width+0.0);
+
+                //Determine the size of the image on screen
+                RealImageSize = new Size(Convert.ToInt32(ImageSize.Width / scale),Convert.ToInt32(ImageSize.Height / scale));
+
+                //Now determine the correct Y
+                PictureY = (BoxSize.Height - RealImageSize.Height) / 2;
+            } else {
+                //It's taller than it's wide
+                //find the correct X
+
+                //Determine the scale
+                scale = (ImageSize.Height + 0.0) / (BoxSize.Height + 0.0);
+
+                //Determine the size of the image on screen
+                RealImageSize = new Size(Convert.ToInt32(ImageSize.Width / scale),Convert.ToInt32(ImageSize.Height / scale));
+
+                //Now determine the correct X
+                PictureX = (BoxSize.Width - RealImageSize.Width) / 2;
+            }
+
+            //OK now that we know where the picture is and its size.
+            //Now we have to translate the point that we clicked on to a point on the image.
+            //first lets determine if we're in or out of the rectangle that contains the image.
+            Rectangle ImageRectangle = new Rectangle(PictureX,PictureY,RealImageSize.Width,RealImageSize.Height);
+
+            //If it isn't then oh my god we've literally done everything 
+            if(!ImageRectangle.Contains(e.Location)) { fromPreviewPane = false; return; }
+
+            //Convert
+            //subtract PictureX and Picture Y from the click position.
+            int ClickPointX=e.X-PictureX;
+            int ClickPointY=e.Y-PictureY;
+
+            //now scale it.
+            ClickPointX = Convert.ToInt32(ClickPointX * scale);
+            ClickPointY = Convert.ToInt32(ClickPointY * scale);
+
+            User ColideUser=null;
+
+            foreach(User U in MyTrace.AllUsers) {
+                //Create a rectangle that's going to represent this user.
+                if(new Rectangle(U.DrawnX,U.DrawnY,U.Width(),U.Height()).Contains(ClickPointX,ClickPointY)){
+                    ColideUser = U;
+                    break;
+                }
+            }
+
+            if(!(ColideUser is null)) {
+                UserListView.Items[MyTrace.AllUsers.IndexOf(ColideUser)].Selected = true;
+                if(e.Button == MouseButtons.Left) { EditButton_Click(PreviewPictureBox,new EventArgs()); }
+                if(e.Button == MouseButtons.Right) { UsersContextMenu.Show(PreviewPictureBox,e.Location); }
+            } else {
+                if(GetSelectedIndex(false) != -1) { UserListView.Items[GetSelectedIndex(false)].Selected = false; } //unselect the user if necessary
+                if(e.Button == MouseButtons.Left) { new PreviewForm(MyTrace.TraceImage).ShowDialog(); }
+                if(e.Button == MouseButtons.Right) {UsersContextMenu.Show(PreviewPictureBox,e.Location);}
+            }
+            fromPreviewPane = false;
+        }
+
 
         //-[Context Menu Items]------------------------------------------------------------------------------------------------------------------------------------------
+
+        private bool fromPreviewPane = false;
+
+        /// <summary>Enables or disables the usercontextmenu when it's time to do so.</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UsersContextMenu_Opening(object sender,System.ComponentModel.CancelEventArgs e) {
+
+            newUnderThisUserToolStripMenuItem.Enabled = true;
+            newUnderThisUserToolStripMenuItem.Text = "New User under selected user";
+            editToolStripMenuItem.Enabled = true;
+            deleteToolStripMenuItem.Enabled = true;
+            reLinkToolStripMenuItem.Enabled = true;
+
+            bGOptionsToolStripMenuItem.Visible = fromPreviewPane;
+            BGOptionsToolStripSeparator.Visible = fromPreviewPane;
+            changeServerIconToolStripMenuItem.Visible = fromPreviewPane;
+
+            //Case to show new Root User and only allow the user to set that option
+            if(MyTrace.AllUsers.Count == 0) { 
+                newUnderThisUserToolStripMenuItem.Text = "New Root User";
+
+                editToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+                reLinkToolStripMenuItem.Enabled = false;
+
+                return; 
+            }
+
+            //Case to cancel if right click on the listview with nothing selected
+            if(GetSelectedIndex(false) == -1 && !fromPreviewPane) { e.Cancel = true; return; }
+
+            //Case to 
+            if(GetSelectedIndex(false) == -1 && fromPreviewPane) {
+
+                newUnderThisUserToolStripMenuItem.Enabled = false;
+                editToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+                reLinkToolStripMenuItem.Enabled = false;
+                return; 
+            }
+
+            if(MyTrace.AllUsers[GetSelectedIndex()].Equals(MyTrace.RootUser)){
+                editToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+                reLinkToolStripMenuItem.Enabled = false;
+            }
+
+            newUnderThisUserToolStripMenuItem.Text = "New user under " + MyTrace.AllUsers[GetSelectedIndex()].Name;
+        }
 
         /// <summary>Creates a new user under the user that was right clicked</summary>
         /// <param name="sender"></param>
@@ -312,7 +447,7 @@ namespace Igtampe.UserTracer {
 
         //-[Methods]------------------------------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>Enabled or disables buttons relating to modification of users in the UserTrace</summary>
+        /// <summary>Enables or disables buttons relating to modification of users in the UserTrace</summary>
         /// <param name="Enabled"></param>
         private void ModifyButtons(bool Enabled) {
             EditButton.Enabled = Enabled;
@@ -423,5 +558,6 @@ namespace Igtampe.UserTracer {
 
             } else { return true; }
         }
+
     }
 }

@@ -193,7 +193,12 @@ namespace Igtampe.UserTracer {
         /// <param name="Y"></param>
         /// <param name="GRD"></param>
         private void DrawTrace(User U,int X,int Y,Graphics GRD) {
-            if(U.Children.Count == 0) { GRD.DrawImage(U.UserCard,X,Y+5); return; }
+            if(U.Children.Count == 0) { 
+                GRD.DrawImage(U.UserCard,X,Y+5);
+                U.DrawnX = X;
+                U.DrawnY = Y+5;
+                return; 
+            }
 
             //OK now comes the complicated part.
 
@@ -203,6 +208,8 @@ namespace Igtampe.UserTracer {
             int DrawX = 0; //DrawX is 0 for now.
 
             GRD.DrawImage(U.UserCard,X+DrawX,Y+DrawY);
+            U.DrawnX = X+DrawX;
+            U.DrawnY = Y + DrawY;
 
             //Let's take a moment to calculate where each line will originate, and to set up the pen.
             Pen ArrowPen = new Pen(new SolidBrush(Color.Black),10);

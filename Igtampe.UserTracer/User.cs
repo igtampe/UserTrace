@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Igtampe.UserTracer {
 
     /// <summary>Holds a UserTrace User Object</summary>
-    public class User : IComparable {
+    public class User:IComparable {
 
         //-[Properties]------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +35,12 @@ namespace Igtampe.UserTracer {
 
         /// <summary>Usercard holder</summary>
         private Image usercard;
+
+        /// <summary>X at which this card was drawn on</summary>
+        internal int DrawnX { get; set; } = 0; 
+
+        /// <summary>Y at which this card was drawn on</summary>
+        internal int DrawnY { get; set; } = 0;
 
         /// <summary>Gets the UserCard for a User. If it does not exist, it is generated.</summary>
         public Image UserCard { 
