@@ -32,6 +32,8 @@ namespace Igtampe.UserTracer {
             myUser = U; 
             allUsers = AllUsers;
 
+            if(myUser.Name.ToUpper() != "NAME") { label1.Text = "Who invited " + myUser.Name + "?"; }
+
             RecursivePopulate(AllUsers[0],"");
         }
 
