@@ -37,8 +37,14 @@ namespace Igtampe.UserTracer {
             Splash.Show();
         }
 
+        /// <summary>Loads the trace when the form loads</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Loading(object sender,EventArgs e) {LoadTrace(MyTrace);}
 
+        /// <summary>Does nothing when the form is shown. Reserved for later.</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Shown(object sender,EventArgs e) {}
 
         //-[Buttons]------------------------------------------------------------------------------------------------------------------------------------------
