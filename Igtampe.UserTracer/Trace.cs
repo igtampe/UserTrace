@@ -54,7 +54,7 @@ namespace Igtampe.UserTracer {
                !File.Exists(ProjectDir+"/"+"Project.UTrace") ||
                !File.Exists(ProjectDir+"/"+"Users.DOD") ||
                !Directory.Exists(ProjectDir+"/"+"Images")
-                ) { throw new ArgumentException("Project Dir does not contain a project"); }
+                ) { throw new ArgumentException( ProjectDir + " does not contain a project"); }
 
             //Load the Project DOD
             Dictionary<string,string> ProjectDOD = DOD.Load(ProjectDir + "/" + "Project.UTrace");
