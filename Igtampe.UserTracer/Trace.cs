@@ -88,6 +88,7 @@ namespace Igtampe.UserTracer {
         /// <summary>saves the UserTrace to a directory</summary>
         /// <param name="ProjectDir"></param>
         public void SaveTrace(string ProjectDir) {
+            if(rootuser is null) { throw new InvalidOperationException("Root user is not defined!"); }
             if(!Directory.Exists(ProjectDir)) { Directory.CreateDirectory(ProjectDir); }
             if(!Directory.Exists(ProjectDir + "/images")) { Directory.CreateDirectory(ProjectDir + "/images"); }
             Dictionary<string,string> ProjectDOD = new Dictionary<string,string> {

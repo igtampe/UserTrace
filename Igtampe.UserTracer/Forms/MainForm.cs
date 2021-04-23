@@ -363,7 +363,10 @@ namespace Igtampe.UserTracer {
         /// <param name="e"></param>
         private void SaveToolStripMenuItem_Click(object sender,EventArgs e) {
             if(string.IsNullOrWhiteSpace(SaveLocaiton)) { SaveAsToolStripMenuItem_Click(sender,e); return; }
-            MyTrace.SaveTrace(SaveLocaiton);
+            try {MyTrace.SaveTrace(SaveLocaiton);} catch(InvalidOperationException) {
+                MessageBox.Show("Cannot save this UserTrace. You need to put at least one user (The Root)","Sorry, no",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             Modified = false;
         }
 
