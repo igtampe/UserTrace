@@ -16,7 +16,15 @@ namespace Igtampe.UserTracer {
         private string savelocale = "";
 
         /// <summary>Location on disk the usertrace being edited will be saved to</summary>
-        public string SaveLocaiton { get { return savelocale; } set { savelocale = value; Text = "UserTrace - " + value; } }
+        public string SaveLocaiton { 
+            get { return savelocale; } 
+            set { 
+                savelocale = value;
+
+                if(string.IsNullOrWhiteSpace(savelocale)) { Text = "UserTrace - " + "New Project"; } 
+                else { Text = "UserTrace - " + value; }
+            } 
+        }
 
         /// <summary>Used to determine if the trace has been modified since it was loaded or last saved</summary>
         private bool Modified = false;
@@ -407,6 +415,7 @@ namespace Igtampe.UserTracer {
         private void NewToolStripMenuItem_Click(object sender,EventArgs e) {
             if(!AreYouSure()) { return; }
 
+            SaveLocaiton = "";
             LoadTrace(new Trace());
             PopulateListview();
             Modified = false;

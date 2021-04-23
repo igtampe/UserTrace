@@ -522,7 +522,7 @@ namespace Igtampe.UserTracer {
             this.MainMenuStrip = this.TheMenuStrip;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UserTracer - New File";
+            this.Text = "UserTracer - New Project";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingHandler);
             this.Load += new System.EventHandler(this.MainForm_Loading);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
