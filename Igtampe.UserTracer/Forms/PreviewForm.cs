@@ -31,5 +31,10 @@ namespace Igtampe.UserTracer {
         private void SaveToolStripMenuItem_Click(object sender,System.EventArgs e) {
             if(ExportFileDialog.ShowDialog() == DialogResult.OK) { ImageBox.Image.Save(ExportFileDialog.FileName,System.Drawing.Imaging.ImageFormat.Png); }
         }
+
+        /// <summary>Close the preview picturebox if the image is clicked</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImageBox_Click(object sender,System.EventArgs e) { Close(); }
     }
 }
