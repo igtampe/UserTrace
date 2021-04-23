@@ -289,13 +289,12 @@ namespace Igtampe.UserTracer {
                 using(Pen T = new Pen(new SolidBrush(Color.Red),10))
                 using(Graphics GRD = Graphics.FromImage(PreviewPictureBox.Image)) { GRD.DrawRectangle(T,ColideUser.DrawnX,ColideUser.DrawnY,ColideUser.Width(),ColideUser.Height()); }
                 PreviewPictureBox.Refresh();
+                using(Pen T = new Pen(new SolidBrush(Color.Black),10))
+                using(Graphics GRD = Graphics.FromImage(PreviewPictureBox.Image)) { GRD.DrawRectangle(T,ColideUser.DrawnX,ColideUser.DrawnY,ColideUser.Width(),ColideUser.Height()); }
 
                 UserListView.Items[MyTrace.AllUsers.IndexOf(ColideUser)].Selected = true;
                 if(e.Button == MouseButtons.Left) { EditButton_Click(PreviewPictureBox,new EventArgs()); }
-                if(e.Button == MouseButtons.Right) { UsersContextMenu.Show(PreviewPictureBox,e.Location); }
-
-                using(Pen T = new Pen(new SolidBrush(Color.Black),10))
-                using(Graphics GRD = Graphics.FromImage(PreviewPictureBox.Image)) { GRD.DrawRectangle(T,ColideUser.DrawnX,ColideUser.DrawnY,ColideUser.Width(),ColideUser.Height()); }
+                if(e.Button == MouseButtons.Right) { UsersContextMenu.Show(PreviewPictureBox,e.Location); }                
 
             } else {
                 if(GetSelectedIndex(false) != -1) { UserListView.Items[GetSelectedIndex(false)].Selected = false; } //unselect the user if necessary
@@ -357,6 +356,11 @@ namespace Igtampe.UserTracer {
 
             newUnderThisUserToolStripMenuItem.Text = "New user under " + MyTrace.AllUsers[GetSelectedIndex()].Name;
         }
+
+        /// <summary>Makes sure to refresh the picturebox when the image is refreshed when the thing is closed</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UsersContextMenu_Closing(object sender,ToolStripDropDownClosingEventArgs e) {PreviewPictureBox.Refresh();}
 
         /// <summary>Creates a new user under the user that was right clicked</summary>
         /// <param name="sender"></param>

@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Windows.Forms;
+
 namespace Igtampe.UserTracer {
     partial class MainForm {
         /// <summary>
@@ -406,6 +409,7 @@ namespace Igtampe.UserTracer {
             this.UsersContextMenu.Name = "contextMenuStrip1";
             this.UsersContextMenu.Size = new System.Drawing.Size(180, 142);
             this.UsersContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.UsersContextMenu_Opening);
+            this.UsersContextMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.UsersContextMenu_Closing);
             // 
             // newUnderThisUserToolStripMenuItem
             // 
