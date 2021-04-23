@@ -76,12 +76,13 @@ namespace Igtampe.UserTracer {
                     UserLinkerForm Linker = new UserLinkerForm(NewUser,MyTrace.AllUsers);
                     if(Linker.ShowDialog() != DialogResult.OK) { return; }
                     NewUser.Parent = MyTrace.AllUsers[Linker.ListIndex];
+                    PreviewPictureBox.Refresh();
                 }
             }
 
 
             UserForm TheForm = new UserForm(NewUser);
-            if(TheForm.ShowDialog() != DialogResult.OK) { return; }
+            if(TheForm.ShowDialog() != DialogResult.OK) { PreviewPictureBox.Refresh();  return; }
 
             while(MyTrace.AllUsers.Contains(NewUser)) {
                 MessageBox.Show("A user with the name " + NewUser.Name + " already exists! Please use a different name.","Two people?",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -108,7 +109,7 @@ namespace Igtampe.UserTracer {
             if(GetSelectedIndex() == -1) { return; }
 
             UserForm TheForm = new UserForm(MyTrace.AllUsers[GetSelectedIndex()]);
-            if(TheForm.ShowDialog() != DialogResult.OK) { return; }
+            if(TheForm.ShowDialog() != DialogResult.OK) { PreviewPictureBox.Refresh(); return; }
 
             MyTrace.AllUsers[GetSelectedIndex()] = TheForm.MyUser;
             GeneratePreview();
@@ -128,7 +129,7 @@ namespace Igtampe.UserTracer {
             }
 
             UserLinkerForm Linker = new UserLinkerForm(MyTrace.AllUsers[GetSelectedIndex()],MyTrace.AllUsers);
-            if(Linker.ShowDialog() != DialogResult.OK) { return; }
+            if(Linker.ShowDialog() != DialogResult.OK) { PreviewPictureBox.Refresh(); return; }
 
 
             //find the parent and link it.
@@ -153,12 +154,13 @@ namespace Igtampe.UserTracer {
 
             if(MyTrace.AllUsers[GetSelectedIndex()].Equals(MyTrace.RootUser)) {
                 MessageBox.Show("You cannot delete the Root User.","no",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                PreviewPictureBox.Refresh();
                 return;
             }
 
             User D = MyTrace.AllUsers[GetSelectedIndex()];
             DialogResult T = MessageBox.Show("Are you sure you want to delete user " + D.Name + "?\n\n All of its children will be moved to " + D.Name +"'s Parent (" +D.Parent.Name +")","Sure?",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if(T != DialogResult.Yes) { return; }
+            if(T != DialogResult.Yes) { PreviewPictureBox.Refresh(); return; }
 
             int ParentIndex = MyTrace.AllUsers.IndexOf(D.Parent);
 
@@ -282,9 +284,19 @@ namespace Igtampe.UserTracer {
             }
 
             if(!(ColideUser is null)) {
+
+                //lets draw algo:
+                using(Pen T = new Pen(new SolidBrush(Color.Red),10))
+                using(Graphics GRD = Graphics.FromImage(PreviewPictureBox.Image)) { GRD.DrawRectangle(T,ColideUser.DrawnX,ColideUser.DrawnY,ColideUser.Width(),ColideUser.Height()); }
+                PreviewPictureBox.Refresh();
+
                 UserListView.Items[MyTrace.AllUsers.IndexOf(ColideUser)].Selected = true;
                 if(e.Button == MouseButtons.Left) { EditButton_Click(PreviewPictureBox,new EventArgs()); }
                 if(e.Button == MouseButtons.Right) { UsersContextMenu.Show(PreviewPictureBox,e.Location); }
+
+                using(Pen T = new Pen(new SolidBrush(Color.Black),10))
+                using(Graphics GRD = Graphics.FromImage(PreviewPictureBox.Image)) { GRD.DrawRectangle(T,ColideUser.DrawnX,ColideUser.DrawnY,ColideUser.Width(),ColideUser.Height()); }
+
             } else {
                 if(GetSelectedIndex(false) != -1) { UserListView.Items[GetSelectedIndex(false)].Selected = false; } //unselect the user if necessary
                 if(e.Button == MouseButtons.Left) { new PreviewForm(MyTrace.TraceImage).ShowDialog(); }
