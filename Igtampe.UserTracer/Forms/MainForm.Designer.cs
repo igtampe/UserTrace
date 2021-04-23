@@ -520,6 +520,7 @@ namespace Igtampe.UserTracer {
             this.Controls.Add(this.TheMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TheMenuStrip;
+            this.MinimumSize = new System.Drawing.Size(779, 480);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserTracer - New Project";

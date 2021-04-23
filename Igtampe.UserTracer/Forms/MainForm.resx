@@ -170,9 +170,6 @@
   <metadata name="UsersContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>262, 22</value>
   </metadata>
-  <metadata name="TheToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>262, 44</value>
-  </metadata>
   <metadata name="ImagePicker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>19, 49</value>
   </metadata>
