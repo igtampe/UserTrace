@@ -390,7 +390,7 @@ namespace Igtampe.UserTracer {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SaveAsToolStripMenuItem_Click(object sender,EventArgs e) {
-            ProjectDirPicker.Description = "Pick a folder to save this UserTrace to";
+            ProjectDirPicker.Description = "Pick a folder to save this UserTrace to.\n\nThis folder should probably be empty!";
             if(ProjectDirPicker.ShowDialog() == DialogResult.OK) {
                 SaveLocaiton = ProjectDirPicker.SelectedPath;
                 SaveToolStripMenuItem_Click(sender,e);
@@ -409,7 +409,7 @@ namespace Igtampe.UserTracer {
 
             if(!AreYouSure()) { return; }
 
-            ProjectDirPicker.Description = "Pick a folder to Open a UserTrace from";
+            ProjectDirPicker.Description = "Pick a folder to Open a UserTrace from.\n\nThis folder should must contain a Project.UTRACE file";
             if(ProjectDirPicker.ShowDialog() == DialogResult.OK) {
 
                 Trace T;
