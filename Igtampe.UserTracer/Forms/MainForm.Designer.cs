@@ -29,7 +29,7 @@ namespace Igtampe.UserTracer {
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Professor Chopo",
             "20"}, -1);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.TheMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,8 +73,8 @@ namespace Igtampe.UserTracer {
             this.ExportFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ProjectDirPicker = new System.Windows.Forms.FolderBrowserDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.menuStrip1.SuspendLayout();
+            this.TheToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.TheMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -85,16 +85,16 @@ namespace Igtampe.UserTracer {
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // TheMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TheMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1326, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.TheMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.TheMenuStrip.Name = "TheMenuStrip";
+            this.TheMenuStrip.Size = new System.Drawing.Size(1326, 24);
+            this.TheMenuStrip.TabIndex = 1;
+            this.TheMenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -220,7 +220,7 @@ namespace Igtampe.UserTracer {
             this.RootUserComboBox.Size = new System.Drawing.Size(204, 21);
             this.RootUserComboBox.TabIndex = 11;
             this.RootUserComboBox.Text = "Professor Chopo";
-            this.toolTip1.SetToolTip(this.RootUserComboBox, "The root user (User where all other users will stem from)\r\n\r\n\r\nNOTE: If you chang" +
+            this.TheToolTip.SetToolTip(this.RootUserComboBox, "The root user (User where all other users will stem from)\r\n\r\n\r\nNOTE: If you chang" +
         "e this, Users that come before the new root,\r\n(IE Its parent, its parent\'s paren" +
         "t, etc.) may be lost!!");
             this.RootUserComboBox.SelectedIndexChanged += new System.EventHandler(this.RootUserComboBox_SelectedIndexChanged);
@@ -243,7 +243,7 @@ namespace Igtampe.UserTracer {
             this.TileBG.Size = new System.Drawing.Size(70, 23);
             this.TileBG.TabIndex = 9;
             this.TileBG.Text = "BG Options";
-            this.toolTip1.SetToolTip(this.TileBG, "Choose an image to tile in the background");
+            this.TheToolTip.SetToolTip(this.TileBG, "Choose an image to tile in the background");
             this.TileBG.UseVisualStyleBackColor = true;
             this.TileBG.Click += new System.EventHandler(this.TileBG_Click);
             // 
@@ -265,7 +265,7 @@ namespace Igtampe.UserTracer {
             this.PFPPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PFPPictureBox.TabIndex = 7;
             this.PFPPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.PFPPictureBox, "Click me to change the server icon");
+            this.TheToolTip.SetToolTip(this.PFPPictureBox, "Click me to change the server icon");
             this.PFPPictureBox.Click += new System.EventHandler(this.PFPPictureBox_Click);
             // 
             // CreatedDateTimePicker
@@ -274,7 +274,7 @@ namespace Igtampe.UserTracer {
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(204, 20);
             this.CreatedDateTimePicker.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.CreatedDateTimePicker, "The date that the server was created on");
+            this.TheToolTip.SetToolTip(this.CreatedDateTimePicker, "The date that the server was created on");
             this.CreatedDateTimePicker.ValueChanged += new System.EventHandler(this.CreatedDateTimePicker_ValueChanged);
             // 
             // NameBox
@@ -285,7 +285,7 @@ namespace Igtampe.UserTracer {
             this.NameBox.Size = new System.Drawing.Size(262, 39);
             this.NameBox.TabIndex = 5;
             this.NameBox.Text = "A Server";
-            this.toolTip1.SetToolTip(this.NameBox, "The Name of the Server");
+            this.TheToolTip.SetToolTip(this.NameBox, "The Name of the Server");
             this.NameBox.TextChanged += new System.EventHandler(this.NameBox_TextChanged);
             // 
             // groupBox2
@@ -377,7 +377,7 @@ namespace Igtampe.UserTracer {
             this.UserListView.Name = "UserListView";
             this.UserListView.Size = new System.Drawing.Size(347, 403);
             this.UserListView.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.UserListView, "Users in this UserTrace");
+            this.TheToolTip.SetToolTip(this.UserListView, "Users in this UserTrace");
             this.UserListView.UseCompatibleStateImageBehavior = false;
             this.UserListView.View = System.Windows.Forms.View.Details;
             this.UserListView.SelectedIndexChanged += new System.EventHandler(this.UserListView_SelectedIndexChange);
@@ -479,7 +479,7 @@ namespace Igtampe.UserTracer {
             this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PreviewPictureBox.TabIndex = 0;
             this.PreviewPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.PreviewPictureBox, "Too small? Click me for a full size preview");
+            this.TheToolTip.SetToolTip(this.PreviewPictureBox, "Too small? Click me for a full size preview");
             this.PreviewPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PreviewPictureBox_Click);
             // 
             // ImagePicker
@@ -517,17 +517,17 @@ namespace Igtampe.UserTracer {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1326, 608);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.TheMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.TheMenuStrip;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserTracer - New File";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingHandler);
             this.Load += new System.EventHandler(this.MainForm_Loading);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.TheMenuStrip.ResumeLayout(false);
+            this.TheMenuStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PFPPictureBox)).EndInit();
@@ -544,7 +544,7 @@ namespace Igtampe.UserTracer {
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip TheMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -585,7 +585,7 @@ namespace Igtampe.UserTracer {
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip TheToolTip;
         private System.Windows.Forms.ToolStripSeparator BGOptionsToolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem bGOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeServerIconToolStripMenuItem;

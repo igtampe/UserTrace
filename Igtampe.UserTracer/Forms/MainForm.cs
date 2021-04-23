@@ -22,7 +22,7 @@ namespace Igtampe.UserTracer {
         private bool Modified = false;
 
         /// <summary>Splash form to be shown</summary>
-        private SplashForm Splash = new SplashForm();
+        private readonly SplashForm Splash = new SplashForm();
 
         //-[Constructor]------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ namespace Igtampe.UserTracer {
             Splash.Show();
         }
 
-        private void MainForm_Loading(object sender,EventArgs e) {LoadTrace(MyTrace);            }
+        private void MainForm_Loading(object sender,EventArgs e) {LoadTrace(MyTrace);}
 
         private void MainForm_Shown(object sender,EventArgs e) {}
 
@@ -188,7 +188,7 @@ namespace Igtampe.UserTracer {
             }
         }
 
-        /// <summary>Handles creating a previewform for the UserTrace image</summary>
+        /// <summary>Handles creating a previewform for the UserTrace image and its big big subroutine</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PreviewPictureBox_Click(object sender,MouseEventArgs e) {
@@ -279,9 +279,9 @@ namespace Igtampe.UserTracer {
             fromPreviewPane = false;
         }
 
-
         //-[Context Menu Items]------------------------------------------------------------------------------------------------------------------------------------------
 
+        /// <summary>I gave up and put a small variable to indicate if a rightclick was from the previewpane instead of the listview. </summary>
         private bool fromPreviewPane = false;
 
         /// <summary>Enables or disables the usercontextmenu when it's time to do so.</summary>
