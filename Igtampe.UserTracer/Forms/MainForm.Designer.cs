@@ -92,7 +92,7 @@ namespace Igtampe.UserTracer {
             this.helpToolStripMenuItem});
             this.TheMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.TheMenuStrip.Name = "TheMenuStrip";
-            this.TheMenuStrip.Size = new System.Drawing.Size(1326, 24);
+            this.TheMenuStrip.Size = new System.Drawing.Size(1142, 24);
             this.TheMenuStrip.TabIndex = 1;
             this.TheMenuStrip.Text = "menuStrip1";
             // 
@@ -461,7 +461,7 @@ namespace Igtampe.UserTracer {
             this.groupBox3.Location = new System.Drawing.Point(368, 3);
             this.groupBox3.Name = "groupBox3";
             this.tableLayoutPanel1.SetRowSpan(this.groupBox3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(955, 578);
+            this.groupBox3.Size = new System.Drawing.Size(771, 578);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Preview";
@@ -475,7 +475,7 @@ namespace Igtampe.UserTracer {
             this.PreviewPictureBox.Image = global::Igtampe.UserTracer.Properties.Resources.Sandstone;
             this.PreviewPictureBox.Location = new System.Drawing.Point(3, 16);
             this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(949, 559);
+            this.PreviewPictureBox.Size = new System.Drawing.Size(765, 559);
             this.PreviewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PreviewPictureBox.TabIndex = 0;
             this.PreviewPictureBox.TabStop = false;
@@ -508,14 +508,14 @@ namespace Igtampe.UserTracer {
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1326, 584);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1142, 584);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1326, 608);
+            this.ClientSize = new System.Drawing.Size(1142, 608);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TheMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
