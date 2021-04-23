@@ -13,10 +13,13 @@ namespace Igtampe.UserTracer {
             Application.SetCompatibleTextRenderingDefault(false);
 
             Trace LoadTrace = new Trace();
-
+            
             if(args.Length != 0) {
                 args[0] = args[0].ToUpper().Replace("PROJECT.UTRACE","");
-                LoadTrace = new Trace(args[0]); 
+                try {LoadTrace = new Trace(args[0]);} catch(Exception E) {
+                    MessageBox.Show(E.Message,"no",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             MainForm theForm = new MainForm(LoadTrace);
